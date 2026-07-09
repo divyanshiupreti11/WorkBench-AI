@@ -1,12 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
+import path from "path";
 import connectDB from "./config/db.js";
 import router from "./routes/agent.route.js";
+
+import { fileURLToPath } from "url";
 dotenv.config();
 const app = express();
 app.use(express.json());
 const port=process.env.PORT
-
+app.use("/temp", express.static(path.join(process.cwd(), "temp")));
 app.use("/",router);
 
 app.use((err, req, res, next) => {

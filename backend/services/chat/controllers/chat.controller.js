@@ -1,56 +1,54 @@
 import Conversation
 from "../models/conversation.model.js";
 
-export const createConversation =async(req,res)=>{
+export const createConversation = async (req, res) => {
+  try {
+    const userId = req.headers["x-user-id"];
+    console.log("userId:", userId);
 
- try{
- const userId =req.headers["x-user-id"];
- console.log("userId",userId)
-  const conversation =await Conversation.create({
-   userId:userId
-  });
+    const conversation = await Conversation.create({
+      userId,
+    });
 
-  res.json(
-   conversation
-  );
+    console.log("Conversation created:", conversation);
 
- }catch(error){
+    return res.json(conversation);
+  } catch (error) {
+    console.log("========== CHAT ERROR ==========");
+    console.error(error);
+    console.log("Error message:", error.message);
+    console.log("Error stack:", error.stack);
+    console.log("===============================");
 
-  res.status(500).json({
-   message:error.message
-  });
-
- }
-
-}
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
 
 
-export const getConversations =async(req,res)=>{
+export const getConversations = async (req, res) => {
+  try {
+    const userId = req.headers["x-user-id"];
 
- try{
- const userId =req.headers["x-user-id"];
-  const conversations =await Conversation.find({
+    const conversations = await Conversation.find({
+      userId,
+    }).sort({
+      updatedAt: -1,
+    });
 
-   userId:userId
+    return res.json(conversations);
+  } catch (error) {
+    console.log("========== GET CONVERSATIONS ERROR ==========");
+    console.error(error);
+    console.log("Error message:", error.message);
+    console.log("Error stack:", error.stack);
 
-  })
-  .sort({
-   updatedAt:-1
-  });
-
-  res.json(
-   conversations
-  );
-
- }catch(error){
-
-  res.status(500).json({
-   message:error.message
-  });
-
- }
-
-}
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
 
 import Message
 from "../models/message.model.js";
@@ -142,3 +140,25 @@ try {
 
 }
 }
+export const deleteConversation = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Conversation delete
+    await Conversation.findByIdAndDelete(id);
+
+    // Saare messages delete
+    await Message.deleteMany({
+      conversationId: id,
+    });
+
+    res.json({
+      success: true,
+      message: "Conversation deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};

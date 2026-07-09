@@ -4,17 +4,17 @@ import { getModel } from "../utils/model.js";
 
 export const codingAgent = async (state) => {
 
-await checkAgentLimit(
-    state.userId,
-    "coding"
-  );
- await deductCredits(
+//await checkAgentLimit(
+  //  state.userId,
+    //"coding"
+  //);
+ //await deductCredits(
 
-        state.userId,
+       // state.userId,
 
-        "coding"
+       // "coding"
 
-    );
+    //);
 
 function cleanCode(code = "") {
   return code
@@ -26,7 +26,7 @@ function cleanCode(code = "") {
   const llm =
     getModel("coding");
 
- const response = await llm.invoke(`You are CortexAI Coding Agent.
+ const response = await llm.invoke(`You are WorkBenchAI Coding Agent.
 
 Your first task is to identify the user's intent.
 

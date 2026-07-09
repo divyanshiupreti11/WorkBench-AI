@@ -8,28 +8,28 @@ import { deductCredits } from "../utils/deductCredits.js";
 export const chatAgent =
 async(state)=>{
 
-await checkAgentLimit(
-    state.userId,
-    "chat"
-  );
+//await checkAgentLimit(
+  //  state.userId,
+    //"chat"
+  //);
 
-   await deductCredits(
+ // await deductCredits(
 
-        state.userId,
+        // state.userId,
 
-        "chat"
+        // "chat"
 
-    );
+    // );
 
 
- const llm =
- getModel("chat");
+ const llm = getModel("chat");
 
- const history =
+const history =
  await getMemory(
   state.conversationId
  );
-
+ console.log(history);
+console.log(Array.isArray(history));
  
 
 const searchContext = state.searchResults
@@ -49,7 +49,7 @@ Answer the user using only the above search results.
 
   new SystemMessage(
 `
-You are CortexAI, an intelligent AI assistant.
+You are WorkBenchAI, an intelligent AI assistant.
 
 ${searchContext}
 

@@ -12,15 +12,15 @@ export const visionAgent = async (state) => {
 
   try {
 
-    await checkAgentLimit(
-      state.userId,
-      "image"
-    );
+    //await checkAgentLimit(
+      //state.userId,
+      //"image"
+   // );
 
-    await deductCredits(
-      state.userId,
-      "image"
-    );
+   // await deductCredits(
+     // state.userId,
+      //"image"
+   //);
 
     const llm =
       getModel("vision");
@@ -37,7 +37,7 @@ export const visionAgent = async (state) => {
 
       new SystemMessage(`
 
-You are CortexAI Vision Agent.
+You are WorkBenchAI Vision Agent.
 
 Rules:
 

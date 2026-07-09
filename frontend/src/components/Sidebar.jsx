@@ -1,9 +1,26 @@
 import { useEffect, useState } from "react";
-import { Plus, MessageSquare, Settings, LogOut, User, PenSquare, Menu, X, Coins, ConeIcon, CoinsIcon } from "lucide-react";
+import {
+  Plus,
+  MessageSquare,
+  Search,
+  Settings,
+  LogOut,
+  User,
+  PenSquare,
+  Menu,
+  X,
+  Coins,
+  Trash2,
+  CoinsIcon
+} from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import api from "../utils/axios";
 import { setUserData } from "../redux/user.slice";
-import { createConversation, getConversations } from "../features/conversation.api";
+import {
+  createConversation,
+  getConversations,
+  deleteConversation
+} from "../features/conversation.api";
 import { addConversation, setConversations, setSelectedConversation } from "../redux/conversation.slice";
 import { getMessages } from "../features/message.api";
 import { setArtifacts, setMessages } from "../redux/message.slice";
@@ -53,6 +70,23 @@ const [showBilling, setShowBilling] =useState(false);
     dispatch(setMessages(messages));
      dispatch(setArtifacts(messages.artifacts));
   };
+  const handleDeleteConversation = async (id) => {
+  try {
+    await deleteConversation(id);
+
+    const data = await getConversations();
+
+    dispatch(setConversations(data));
+
+    if (selectedConversation?._id === id) {
+      dispatch(setSelectedConversation(null));
+      dispatch(setMessages([]));
+      dispatch(setArtifacts([]));
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
 
   const PanelIcon = () => (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -62,7 +96,7 @@ const [showBilling, setShowBilling] =useState(false);
 
   /* ── Collapsed rail — desktop only ── */
   const CollapsedRail = () => (
-    <div className="hidden lg:flex flex-col items-center w-[56px] h-screen bg-[#0d0f14] border-r border-white/[0.06] py-4 gap-1 shrink-0">
+    <div className="hidden lg:flex flex-col items-center w-[56px] h-screen bg-white border-r border-slate-200 py-4 gap-1 shrink-0">
       <button
         onClick={() => setCollapsed(false)}
         className="flex items-center justify-center w-9 h-9 rounded-xl text-slate-500 hover:text-slate-200 hover:bg-white/[0.05] transition-colors duration-150 bg-transparent border-none cursor-pointer mb-1"
@@ -113,7 +147,7 @@ const [showBilling, setShowBilling] =useState(false);
     <div className="flex flex-col h-full">
 
       {/* Header */}
-      <div className="flex items-center gap-2.5 px-4 py-4 border-b border-white/[0.06]">
+      <div className="flex items-center gap-2.5 px-4 py-4 border-b border-slate-200">
         {/* Desktop collapse */}
         <button
           onClick={() => setCollapsed(true)}
@@ -130,11 +164,27 @@ const [showBilling, setShowBilling] =useState(false);
           <X size={15} />
         </button>
 
-        <span className="text-[16px] font-semibold text-slate-100 tracking-tight flex-1">CortexAI</span>
+       <div className="flex items-center gap-3 flex-1">
 
-        <span className="text-[10px] font-medium text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-2 py-0.5 rounded-full tracking-wide">
-         {userData?.plan ?? "pro"}
-        </span>
+  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-400 flex items-center justify-center text-white font-bold text-xl shadow-md">
+    W
+  </div>
+
+  <div>
+    <h1 className="font-bold text-slate-900">
+      WorkBenchAI
+    </h1>
+
+    <p className="text-xs text-slate-500">
+      Professional AI Workspace
+    </p>
+  </div>
+
+</div>
+
+        <span className="text-[10px] font-semibold text-blue-700 bg-blue-100 border border-blue-200 px-2.5 py-1 rounded-full tracking-wide">
+  {userData?.plan ?? "Free"}
+</span>
 
         <button
           onClick={handleCreateConversation}
@@ -148,13 +198,32 @@ const [showBilling, setShowBilling] =useState(false);
       <div className="px-4 pt-4 pb-1">
         <button
           onClick={handleCreateConversation}
-          className="w-full flex items-center justify-center gap-2 text-sm font-medium text-white bg-gradient-to-br from-indigo-500 to-violet-700 rounded-xl py-[10px] border-none cursor-pointer hover:opacity-90 transition-opacity duration-150"
+          className="w-full flex items-center justify-center gap-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 rounded-2xl py-3 shadow-lg shadow-blue-400/20 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-400/40"
         >
           <Plus size={15} />
           New Chat
         </button>
       </div>
+     
 
+     <div className="px-4 mt-3">
+
+  <div className="relative">
+
+    <Search
+      size={16}
+      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+    />
+
+    <input
+      type="text"
+      placeholder="Search chats..."
+      className="w-full bg-slate-100 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+    />
+
+  </div>
+
+</div>
       {
         conversations.length==0? (
         
@@ -179,26 +248,53 @@ const [showBilling, setShowBilling] =useState(false);
         {conversations.map((chat) => {
           const isActive = selectedConversation?._id === chat._id;
           const isHov    = hovered === chat._id;
-          return (
-            <div
-              key={chat._id}
-              onClick={() => handleSelectConversation(chat)}
-              onMouseEnter={() => setHovered(chat._id)}
-              onMouseLeave={() => setHovered(null)}
-              className={`flex items-center gap-2.5 cursor-pointer mb-0.5 px-3 py-2.5 rounded-[10px] border transition-colors duration-150
-                ${isActive ? "bg-indigo-500/10 border-indigo-500/[0.18]"
-                : isHov   ? "bg-white/[0.05] border-transparent"
-                :            "bg-transparent border-transparent"}`}
-            >
-              <div className={`flex items-center justify-center shrink-0 w-[28px] h-[28px] rounded-lg transition-colors duration-150
-                ${isActive ? "bg-indigo-500/15 text-indigo-400" : "bg-white/[0.05] text-slate-500"}`}>
-                <MessageSquare size={13} />
-              </div>
-              <p className={`text-[13px] font-medium truncate ${isActive ? "text-slate-100" : "text-slate-300"}`}>
-                {chat.title}
-              </p>
-            </div>
-          );
+       return (
+  <div
+    key={chat._id}
+    onClick={() => handleSelectConversation(chat)}
+    onMouseEnter={() => setHovered(chat._id)}
+    onMouseLeave={() => setHovered(null)}
+    className={`flex items-center gap-2.5 cursor-pointer mb-0.5 px-3 py-2.5 rounded-[10px] border transition-colors duration-150
+      ${
+        isActive
+          ? "bg-indigo-500/10 border-indigo-500/[0.18]"
+          : isHov
+          ? "bg-white/[0.05] border-transparent"
+          : "bg-transparent border-transparent"
+      }`}
+  >
+    <div
+      className={`flex items-center justify-center shrink-0 w-[28px] h-[28px] rounded-lg transition-colors duration-150
+      ${
+        isActive
+          ? "bg-indigo-500/15 text-indigo-400"
+          : "bg-white/[0.05] text-slate-500"
+      }`}
+    >
+      <MessageSquare size={13} />
+    </div>
+
+    <p
+      className={`flex-1 text-[13px] font-medium truncate ${
+        isActive ? "text-slate-100" : "text-slate-300"
+      }`}
+    >
+      {chat.title}
+    </p>
+
+    {isHov && (
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          handleDeleteConversation(chat._id);
+        }}
+        className="p-1 rounded hover:bg-red-500/20 text-red-400"
+      >
+        <Trash2 size={14} />
+      </button>
+    )}
+  </div>
+);
         })}
       </div>
 
@@ -261,7 +357,7 @@ const [showBilling, setShowBilling] =useState(false);
       {/* ── Mobile hamburger ── */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="lg:hidden fixed top-3.5 left-4 z-50 flex items-center justify-center w-8 h-8 rounded-lg bg-[#0d0f14] border border-white/[0.06] text-slate-400 hover:text-slate-200 transition-colors duration-150 cursor-pointer"
+        className="lg:hidden fixed top-3.5 left-4 z-50 flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-slate-200 text-slate-400 hover:text-slate-200 transition-colors duration-150 cursor-pointer"
       >
         <Menu size={16} />
       </button>
@@ -278,7 +374,7 @@ const [showBilling, setShowBilling] =useState(false);
       <div className={`
         fixed lg:static inset-y-0 left-0 z-50
         w-[270px] h-screen shrink-0
-        bg-[#0d0f14] border-r border-white/[0.06]
+        bg-white border-r border-slate-200
         transition-transform duration-250
         ${mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
       `}>

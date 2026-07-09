@@ -6,7 +6,11 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Copy, Check } from "lucide-react";
 
-function MessageBubble({ role, content ,images}) {
+function MessageBubble({
+  role,
+  content,
+  images = []
+}) {
   const isUser = role === "user";
   const [lightboxSrc, setLightboxSrc] = useState(null);
 const [copiedCode, setCopiedCode] = useState("");
@@ -103,17 +107,22 @@ const markdown = (content || "")
       </td>
     ),
 
-    a: ({ href, children }) => (
-      <a
-        href={href}
-        target="_blank"
-        rel="noreferrer"
-        className="text-indigo-400 underline inline-flex items-center gap-1"
-      >
-        {children}
-        <FiExternalLink size={11} />
-      </a>
-    ),
+   a: ({ href, children }) => {
+  const isPdf = href?.toLowerCase().endsWith(".pdf");
+
+  return (
+    <a
+      href={href}
+      target={isPdf ? "_self" : "_blank"}
+      rel="noreferrer"
+      download={isPdf}
+      className="text-indigo-400 underline inline-flex items-center gap-1"
+    >
+      {children}
+      <FiExternalLink size={11} />
+    </a>
+  );
+},
 
     img: ({ src }) => {
       if (!src) return null;

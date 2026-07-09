@@ -11,12 +11,19 @@ import { auth, googleProvider } from "../../firebase";
 function Home() {
   const { userData } = useSelector(state => state.user);
   const dispatch=useDispatch()
-const login=async (token)=>{
+const login = async (token) => {
   try {
-    const {data}=await api.post(`/api/auth/login`,{token})
-    dispatch(setUserData(data.user))
+    console.log("Before API");
+
+    const { data } = await api.post("/api/auth/login", { token });
+
+    console.log("After API", data);
+
+    dispatch(setUserData(data.user));
   } catch (error) {
-    console.log(error)
+    console.log("Error object:", error);
+    console.log("Error response:", error.response);
+    console.log("Error message:", error.message);
   }
 }
   const handleGoogleLogin =async () => {
@@ -28,7 +35,7 @@ const login=async (token)=>{
   };
 
   return (
-<div className="h-screen flex bg-[#0d0f14] text-white overflow-hidden">
+<div className="h-screen flex bg-gradient-to-br from-white via-slate-50 to-blue-50 overflow-hidden">
       <Sidebar />
       <ChatArea />
       <ArtifactPanel />
@@ -38,13 +45,15 @@ const login=async (token)=>{
           <div className="w-[340px] bg-[#13151c] border border-white/[0.08] rounded-2xl p-7 flex flex-col gap-5">
 
             <div className="flex flex-col gap-1">
-              <h2 className="text-[17px] font-semibold text-slate-100 tracking-tight">Welcome to CortexAI</h2>
-              <p className="text-[13px] text-slate-500">Please login to continue using the app.</p>
+              <h2 className="text-[17px] font-semibold text-slate-900 tracking-tight">Welcome to WorkBenchAI</h2>
+              <p className="text-[13px] text-slate-600">Please login to continue using the app.</p>
             </div>
 
             <button
   onClick={handleGoogleLogin}
-  className="w-full flex items-center justify-center gap-3 py-[11px] rounded-xl text-sm font-medium text-white bg-gradient-to-br from-indigo-500 to-violet-700 hover:from-indigo-400 hover:to-violet-600 active:from-indigo-600 active:to-violet-800 border border-indigo-500/30 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30 transition-all duration-150 cursor-pointer"
+  className="w-full flex items-center justify-center gap-3 py-[11px] rounded-xl text-sm font-medium text-white bg-gradient-to-br from-blue-600
+via-blue-500
+to-cyan-400 hover:from-indigo-400 hover:to-violet-600 active:from-indigo-600 active:to-violet-800 border border-indigo-500/30 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30 transition-all duration-150 cursor-pointer"
 >
   <FaGoogle size={15} className="text-white" />
   Continue with Google

@@ -6,17 +6,17 @@ import { searchTool } from "../utils/tavily.js";
 
 export const searchAgent =
 async(state)=>{
-await checkAgentLimit(
-    state.userId,
-    "search"
-  );
-  await deductCredits(
+//await checkAgentLimit(
+    //state.userId,
+    //"search"
+  //);
+  //await deductCredits(
 
-        state.userId,
+      //  state.userId,
 
-        "search"
+        //"search"
 
-    ); 
+    //); 
  try{
 
   const results =
@@ -25,8 +25,30 @@ await checkAgentLimit(
  query:state.prompt
 
 } );
+const allowedDomains = [
+  "reuters.com",
+  "bbc.com",
+  "espn.com",
+  "gettyimages.com",
+  "olympics.com",
+  "fifa.com",
+  "nba.com",
+  "formula1.com",
+  "icc-cricket.com",
+  "bcci.tv",
+  "thehindu.com",
+  "indiatoday.in",
+  "ndtv.com",
+  "hindustantimes.com",
+  "sportstar.thehindu.com"
+];
 
-console.log(results)
+const safeImages = (results.images || []).filter((url) =>
+  allowedDomains.some((domain) => url.includes(domain))
+);
+
+console.log("Full Results:", results);
+console.log("Images:", results.images);
 
   return {
 

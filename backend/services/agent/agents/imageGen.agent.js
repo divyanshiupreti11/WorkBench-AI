@@ -1,8 +1,6 @@
 import axios from "axios";
 import { getModel } from "../utils/model.js";
-
-import { uploadToS3 } from "../utils/uploadToS3.js";
-import { getDownloadUrl } from "../utils/getDownloadUrl.js";
+import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
 import { checkAgentLimit } from "../config/agentRateLimit.js";
 import { deductCredits } from "../utils/deductCredits.js";
 
@@ -10,17 +8,17 @@ export const imageAgent = async (state) => {
 
   try {
 
-await checkAgentLimit(
-    state.userId,
-    "image"
-  );
- await deductCredits(
+//await checkAgentLimit(
+  //  state.userId,
+    //"image"
+  //);
+ //await deductCredits(
 
-        state.userId,
+       // state.userId,
 
-        "image"
+        //"image"
 
-    );
+   // );
 
 
     const llm =
@@ -62,51 +60,22 @@ ${state.prompt}
       `https://image.pollinations.ai/prompt/${encodeURIComponent(
         enhancedPrompt
       )}`;
+const imageResponse = await axios.get(imageUrl, {
+  responseType: "arraybuffer",
+});
 
-    const imageResponse =
-      await axios.get(
-        imageUrl,
-        {
-          responseType:
-            "arraybuffer"
-        }
-      );
+const imageBuffer = Buffer.from(imageResponse.data);
 
-    const imageBuffer =
-      Buffer.from(
-        imageResponse.data
-      );
+const result = await uploadToCloudinary(
+  imageBuffer,
+  "WorkBenchAI/images"
+);
 
-    const fileName =
-      `image-${Date.now()}.png`;
-
-    await uploadToS3(
-      imageBuffer,
-      fileName,
-      "image/png"
-    );
-
-    const downloadUrl =
-      await getDownloadUrl(
-        fileName,
-        24*60*60
-      );
-
-    return {
-
-      ...state,
-
-     response: `
-# 🖼️ Image Generated Successfully
-
-![Generated Image](${downloadUrl})
-
-📥 [Download Image](${downloadUrl})
-
-⏳ Link expires in 10 minutes.
-`
-
-    };
+return {
+  ...state,
+  response: "",
+  images: [result.secure_url],
+};
 
   } catch (error) {
 
