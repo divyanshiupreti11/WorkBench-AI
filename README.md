@@ -26,6 +26,8 @@ The application provides a clean, premium interface with secure authentication, 
 - Copy code functionality
 - Image preview support
 
+  ![AI Chat](./ai-chat.png)
+
 ### 💻 Coding Assistant
 - Generate code
 - Explain code
