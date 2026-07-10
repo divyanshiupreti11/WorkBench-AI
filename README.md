@@ -64,3 +64,11 @@ The application provides a clean, premium interface with secure authentication, 
 - Firebase Google Login
 - Secure Authentication
 - Persistent Sessions
+  
+### 📜 Conversation Management
+- Create chats
+- Delete chats
+- Conversation history
+- Automatic title generation
+
+---
