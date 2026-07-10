@@ -34,11 +34,14 @@ The application provides a clean, premium interface with secure authentication, 
 - Debug code
 - Multiple programming languages
 
+  ![Coding Assistant](./ai-code.png)
+  ![Coding Assistant](./ai-preview.png)
+
 ### 🌍 AI Web Search
 - Search the web using AI
 - Summarized responses
 - Rich formatted answers
-
+![Coding Assistant](./ai-search.png)
 ### 🖼 AI Image Generation
 - Generate images from prompts
 - Image preview
