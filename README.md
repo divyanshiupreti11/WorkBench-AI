@@ -46,15 +46,20 @@ The application provides a clean, premium interface with secure authentication, 
 - Generate images from prompts
 - Image preview
 - Download generated images
-
+![Coding Assistant](./ai-image.png)
+![Coding Assistant](./ai-image1.png)
 ### 📄 PDF Generator
 - Generate professional PDF documents
 - Download generated PDFs
+![Coding Assistant](./ai-pdf.png)
+![Coding Assistant](./ai-pdf1.png)
 
 ### 📊 PowerPoint Generator
 - Generate presentation slides
 - Automatic PPT creation
 - Download presentations
+![Coding Assistant](./ai-ppt.png)
+![Coding Assistant](./ai-ppt1.png)
 
 ### 📁 File Upload
 - Upload PDFs
