@@ -72,3 +72,76 @@ The application provides a clean, premium interface with secure authentication, 
 - Automatic title generation
 
 ---
+# 🛠 Tech Stack
+
+## Frontend
+
+- React
+- Redux Toolkit
+- Tailwind CSS
+- Framer Motion
+- React Markdown
+- React Syntax Highlighter
+- Lucide React
+
+## Backend
+
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- Multer
+- Cloudinary
+
+## AI Services
+
+- Google Gemini
+- Image Generation API
+- PPT Generation
+- PDF Generation
+
+## Authentication
+
+- Firebase Authentication
+
+---
+
+# 📂 Project Structure
+
+```
+WorkBenchAI
+│
+├── frontend
+│   ├── components
+│   ├── pages
+│   ├── redux
+│   ├── features
+│   └── utils
+│
+├── backend
+│   ├── services
+│   │   └── agent
+│   ├── routes
+│   ├── middleware
+│   ├── models
+│   └── controllers
+│
+└── README.md
+```
+
+---
+# 👩‍💻 Author
+
+**Divyanshi Upreti**
+
+Computer Science Engineering Student
+
+Graphic Era Hill University
+
+GitHub:
+https://github.com/divyanshiupreti11
+
+LinkedIn:
+https://www.linkedin.com/in/divyanshi-upreti-4a757b322/
+
+---
