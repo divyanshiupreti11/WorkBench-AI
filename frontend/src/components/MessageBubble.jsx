@@ -37,8 +37,27 @@ const markdown = (content || "")
   leading-relaxed
         ${
           isUser
-            ? "bg-gradient-to-br from-indigo-500 to-violet-700 text-white rounded-tr-sm"
-            : " text-slate-200 rounded-tl-sm"
+? `
+bg-[#2563EB]
+text-white
+rounded-tr-sm
+border
+border-blue-700/20
+shadow-lg
+shadow-blue-300/30
+`
+          : `
+bg-gradient-to-br
+from-white/85
+to-blue-50/80
+backdrop-blur-xl
+border
+border-blue-200/70
+shadow-lg
+shadow-blue-200/40
+text-slate-800
+rounded-tl-sm
+`
         }`}
       >
         {images.length > 0 && (
@@ -89,20 +108,22 @@ const markdown = (content || "")
 
     table: ({ children }) => (
       <div className="overflow-x-auto my-4">
-        <table className="min-w-full border border-white/10">
+       <table className="min-w-full border border-blue-100">
           {children}
         </table>
       </div>
     ),
 
     th: ({ children }) => (
-      <th className="border border-white/10 bg-white/5 px-3 py-2 text-left">
+      <th className="border border-blue-100 bg-gradient-to-r
+from-blue-50
+to-cyan-50 px-3 py-2 text-left text-slate-900">
         {children}
       </th>
     ),
 
     td: ({ children }) => (
-      <td className="border border-white/10 px-3 py-2">
+      <td className="border border-blue-100 px-3 py-2 text-slate-700">
         {children}
       </td>
     ),
@@ -116,7 +137,7 @@ const markdown = (content || "")
       target={isPdf ? "_self" : "_blank"}
       rel="noreferrer"
       download={isPdf}
-      className="text-indigo-400 underline inline-flex items-center gap-1"
+     className="text-blue-600 hover:text-cyan-500 underline inline-flex items-center gap-1 transition-colors"
     >
       {children}
       <FiExternalLink size={11} />
@@ -133,7 +154,18 @@ const markdown = (content || "")
           loading="lazy"
           onClick={() => setLightboxSrc(src)}
           onError={(e) => e.currentTarget.remove()}
-          className="w-40 h-28 rounded-xl object-cover cursor-pointer"
+         className="
+w-40
+h-28
+rounded-xl
+object-cover
+cursor-pointer
+transition-all
+duration-300
+hover:scale-105
+hover:shadow-xl
+hover:shadow-blue-300/40
+"
         />
       );
     },
@@ -147,7 +179,20 @@ const markdown = (content || "")
 
       if (!className) {
         return (
-          <code className="px-1.5 py-0.5 rounded bg-white/10 text-pink-400">
+        <code
+className="
+px-2
+py-1
+rounded-lg
+bg-gradient-to-r
+from-blue-50
+to-cyan-50
+border
+border-blue-100
+text-blue-700
+font-semibold
+"
+>
             {value}
           </code>
         );
@@ -158,7 +203,20 @@ const markdown = (content || "")
       return (
         <div className="my-4 overflow-hidden rounded-xl border border-white/10 bg-[#111318]">
 
-          <div className="flex items-center justify-between bg-[#1b1d24] border-b border-white/10 px-4 py-2">
+         <div
+className="
+flex
+items-center
+justify-between
+px-4
+py-2
+bg-gradient-to-r
+from-slate-800
+to-slate-900
+border-b
+border-slate-700
+"
+>
 
             <span className="uppercase text-xs text-slate-400">
               {language}
@@ -166,7 +224,18 @@ const markdown = (content || "")
 
             <button
               onClick={() => copyCode(value)}
-              className="flex items-center gap-1 text-xs"
+           className="
+flex
+items-center
+gap-1
+text-xs
+px-2
+py-1
+rounded-lg
+hover:bg-white/10
+transition-all
+duration-300
+"
             >
               {copiedCode === value ? (
                 <>

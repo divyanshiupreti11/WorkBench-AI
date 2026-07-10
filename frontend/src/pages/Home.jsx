@@ -35,7 +35,14 @@ const login = async (token) => {
   };
 
   return (
-<div className="h-screen flex bg-gradient-to-br from-white via-slate-50 to-blue-50 overflow-hidden">
+<div
+className="
+h-screen
+flex
+overflow-hidden
+bg-[#F6FAFF]
+"
+>
       <Sidebar />
       <ChatArea />
       <ArtifactPanel />

@@ -137,24 +137,72 @@ if (latestArtifactMessage) {
   }, [selectedConversation?._id]);
 
   return (
-    <div className="flex-1 overflow-y-auto px-6 py-6 space-y-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+<div className="relative flex-1 overflow-y-auto px-6 py-6 space-y-5 bg-gradient-to-br from-white via-slate-50 to-blue-50 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       {messages.length === 0 && !isLoading ? (
-        <div className="h-full flex flex-col items-center justify-center text-center px-6">
+    <div
+className="
+relative
+h-full
+w-full
+max-w-[1100px]
+mx-auto
+
+flex
+flex-col
+items-center
+
+pt-10
+
+text-center
+
+overflow-hidden
+"
+>
+        <div className="absolute inset-0 -z-10">
+
+
+
+<div className="absolute top-0 right-0 w-[700px] h-[500px] rounded-full bg-blue-100 blur-[120px]" />
+
+<div className="absolute -left-40 top-24 w-[420px] h-[420px] rounded-full bg-sky-100 blur-[120px]" />
+
+<div className="absolute bottom-0 right-0 w-[520px] h-[520px] rounded-full border border-white/50 rounded-full" />
+<div
+  className="
+    absolute
+    left-8
+    top-32
+    grid
+    grid-cols-10
+    gap-3
+    opacity-40
+  "
+>
+  {Array.from({ length: 80 }).map((_, i) => (
+    <div
+      key={i}
+      className="w-1 h-1 rounded-full bg-blue-200"
+    />
+  ))}
+</div>
+</div>
+
+
 
   {/* Logo */}
-  <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-400 flex items-center justify-center shadow-xl shadow-blue-300/40">
+  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-400 flex items-center justify-center shadow-xl shadow-blue-300/40">
     <span className="text-4xl font-bold text-white">W</span>
   </div>
 
   {/* Heading */}
-  <h1 className="mt-8 text-5xl font-extrabold text-slate-900">
+  <h1 className="mt-3 text-4xl font-extrabold text-slate-900">
     Welcome to{" "}
     <span className="text-blue-600">
       WorkBenchAI
     </span>
   </h1>
 
-  <p className="mt-4 max-w-2xl text-lg text-slate-600">
+  <p className="mt-2 max-w-xl text-base text-slate-600">
     Your AI Workspace for coding, web search, PDF generation,
     presentations, image generation and much more.
   </p>
@@ -196,19 +244,67 @@ if (latestArtifactMessage) {
     ].map((item) => (
       <button
         key={item.title}
-        className="w-56 rounded-3xl bg-white border border-slate-200 p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-left"
+        className="
+group
+
+w-[290px]
+h-[96px]
+
+rounded-[24px]
+
+bg-white/80
+backdrop-blur-xl
+
+border
+border-blue-100
+
+px-6
+py-5
+
+flex
+items-center
+justify-between
+
+shadow-[0_8px_30px_rgba(59,130,246,0.08)]
+
+hover:shadow-[0_18px_45px_rgba(59,130,246,0.18)]
+hover:-translate-y-1
+
+transition-all
+duration-300
+
+text-left
+"
       >
-        <div className="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center">
-          {item.icon}
-        </div>
+        <>
+  {/* Left Icon */}
+  <div
+    className="
+      w-14
+      h-14
+      rounded-2xl
+      bg-blue-50
+      text-blue-600
+      flex
+      items-center
+      justify-center
+      shrink-0
+    "
+  >
+    {item.icon}
+  </div>
 
-        <h2 className="mt-5 text-lg font-bold text-slate-900">
-          {item.title}
-        </h2>
+  {/* Text */}
+  <div className="flex-1 ml-4">
+    <h2 className="text-[22px] font-bold text-slate-900">
+      {item.title}
+    </h2>
 
-        <p className="mt-2 text-sm text-slate-500">
-          {item.desc}
-        </p>
+    <p className="mt-1 text-sm text-slate-500 leading-5">
+      {item.desc}
+    </p>
+  </div>
+</>
       </button>
     ))}
 

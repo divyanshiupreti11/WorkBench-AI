@@ -26,3 +26,8 @@ pnpm-debug.log*
 # OS files
 .DS_Store
 Thumbs.db
+
+# Generated files
+backend/services/agent/temp/
+backend/services/agent/test.pdf
+backend/uploads/

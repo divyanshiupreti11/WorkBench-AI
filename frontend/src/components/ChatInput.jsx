@@ -265,11 +265,69 @@ catch(error){
   };
 
   return (
-   <div className="w-full overflow-hidden px-3 md:px-5 py-4 border-t border-white/[0.06] bg-[#0d0f14]">
-      <div className="flex flex-col gap-2 bg-white/[0.03] border border-white/[0.07] rounded-2xl px-4 pt-3.5 pb-3">
+  <div className="w-full overflow-hidden px-6 py-6 bg-transparent">
+<div
+className="
+relative
+flex
+flex-col
+gap-3
 
+overflow-hidden
 
-    <div className="flex w-[80%] gap-2 pr-2 flex-wrap">
+rounded-[28px]
+
+border
+border-blue-200/70
+
+bg-white/75
+backdrop-blur-2xl
+
+px-6
+py-4
+
+shadow-[0_20px_60px_rgba(59,130,246,0.10)]
+"
+>
+<div
+className="
+absolute
+top-[-120px]
+right-[-120px]
+
+w-[320px]
+h-[320px]
+
+rounded-full
+
+bg-blue-300/20
+
+blur-3xl
+
+pointer-events-none
+"
+/>
+<div
+className="
+absolute
+bottom-[-120px]
+left-[-100px]
+
+w-[260px]
+h-[260px]
+
+rounded-full
+
+bg-sky-200/20
+
+blur-3xl
+
+pointer-events-none
+"
+/>
+    <div className="relative z-10">
+    <div className="flex flex-wrap gap-2">
+
 
     {agents.map((agent) => {
 
@@ -287,19 +345,23 @@ catch(error){
             inline-flex
             items-center
             gap-1.5
-            px-3
-            py-2
-            rounded-full
-            text-xs
+           px-3.5
+py-2
+
+rounded-xl
+
+text-[12px]
+
+font-semibold
             font-medium
             border
             transition-all
 
             ${
-              isActive
-                ? "bg-gradient-to-r from-indigo-500 to-violet-600 text-white border-transparent shadow-[0_1px_8px_rgba(99,102,241,.35)]"
-                : "bg-white/[0.03] text-slate-400 border-white/[0.06] hover:bg-white/[0.07]"
-            }
+  isActive
+    ? "bg-blue-600 text-white border-transparent shadow-lg shadow-blue-300/40"
+   : "bg-blue-50/70 text-slate-700 border border-slate-300 hover:bg-blue-100 hover:border-blue-400 hover:text-blue-600"
+}
           `}
         >
 
@@ -327,9 +389,30 @@ catch(error){
 
 selectedFile && (
 
-<div className="my-3">
+<div className="my-2">
 
-<div className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2">
+<div
+className="
+inline-flex
+items-center
+gap-3
+
+rounded-2xl
+
+border
+border-blue-200
+
+bg-gradient-to-r
+from-blue-50
+to-white
+
+px-4
+py-3
+
+shadow-md
+shadow-blue-100/50
+"
+>
 
 {
 
@@ -339,7 +422,7 @@ selectedFile.type==="application/pdf"
 
 <FileText
 
-size={16}
+size={22}
 
 className="text-red-400"
 
@@ -357,7 +440,7 @@ selectedFile?.type.startsWith("image/")
 
 src={URL.createObjectURL(selectedFile)}
 
-className="h-10 w-10 rounded-xl object-cover mt-3"
+className="h-10 w-10 rounded-xl object-cover"
 
 />
 
@@ -367,7 +450,7 @@ className="h-10 w-10 rounded-xl object-cover mt-3"
 
 <div>
 
-<p className="text-xs text-white">
+<p className="text-sm font-semibold text-slate-800">
 
 {
 
@@ -377,7 +460,7 @@ selectedFile.name
 
 </p>
 
-<p className="text-[10px] text-slate-500">
+<p className="text-xs text-slate-500">
 
 {
 
@@ -412,11 +495,8 @@ className="ml-2"
 >
 
 <X
-
-size={14}
-
-className="text-slate-500 hover:text-white"
-
+size={15}
+className="text-slate-500 hover:text-red-500 transition-colors"
 />
 
 </button>
@@ -436,9 +516,25 @@ className="text-slate-500 hover:text-white"
           placeholder={
 placeholders[selectedAgent]
 }
-          rows={3}
+          rows={1}
           disabled={isLoading}
-          className="w-full bg-transparent outline-none resize-none text-[14px] text-slate-200 placeholder:text-slate-600 leading-relaxed [scrollbar-width:none] [&::-webkit-scrollbar]:hidden disabled:opacity-50"
+          className="
+w-full
+min-h-[50px]
+max-h-[90px]
+bg-transparent
+outline-none
+resize-none
+text-[17px]
+font-medium
+text-slate-800
+placeholder:text-slate-500
+leading-8
+min-h-[36px]
+[scrollbar-width:none]
+[&::-webkit-scrollbar]:hidden
+disabled:opacity-50
+"
         />
 
         {/* Bottom row */}
@@ -470,7 +566,32 @@ setSelectedFile(file);
 }}
 
 />
-            <button className="flex items-center justify-center w-8 h-8 rounded-lg text-slate-600 hover:text-slate-400 hover:bg-white/[0.05] border border-transparent hover:border-white/[0.06] transition-all duration-150 bg-transparent cursor-pointer"
+            <button className="
+flex
+items-center
+justify-center
+
+w-10
+h-10
+
+rounded-2xl
+
+border
+border-blue-200
+
+bg-white/70
+
+text-slate-600
+
+hover:bg-blue-50
+hover:border-blue-400
+hover:text-blue-600
+
+transition-all
+duration-200
+
+cursor-pointer
+"
             onClick={()=>
 fileRef.current.click()
 }
@@ -482,37 +603,20 @@ fileRef.current.click()
 onClick={toggleMic}
 
 className={`
-
 flex
-
 items-center
-
 justify-center
-
-w-8
-
-h-8
-
-rounded-lg
-
+w-10
+h-10
+rounded-2xl
+border
 transition-all
-
 cursor-pointer
-
 ${
-
 isListening
-
-?
-
-"bg-red-500 text-white"
-
-:
-
-"text-slate-600 hover:bg-white/[0.05]"
-
+? "bg-red-500 text-white border-red-500"
+: "border-blue-200 text-slate-600 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600"
 }
-
 `}
 
 >
@@ -538,21 +642,23 @@ isListening
           <button
             onClick={handleSend}
             disabled={!isLoading && !value.trim()}
-            className={`flex items-center justify-center w-8 h-8 rounded-lg border-none cursor-pointer transition-all duration-150
-              ${isLoading
-                ? "bg-white text-[#0d0f14] hover:bg-slate-200"
-                : value.trim()
-                ? "bg-gradient-to-br from-indigo-500 to-violet-700 hover:opacity-90 text-white"
-                : "bg-white/[0.05] text-slate-600 cursor-not-allowed"
-              }`}
+          className={`flex items-center justify-center w-12 h-12 rounded-full border transition-all duration-200 cursor-pointer
+  ${
+    isLoading
+      ? "bg-slate-900 text-white border-slate-900"
+      : value.trim()
+      ? "bg-blue-600 border-blue-600 text-white shadow-xl shadow-blue-400/50 hover:bg-blue-700 hover:scale-105 hover:shadow-blue-500/50"
+      : "bg-blue-50 border-blue-100 text-slate-400   cursor-not-allowed"
+  }`}
           >
-            {isLoading ? <Square size={12} fill="currentColor" /> : <Send size={14} />}
+            {isLoading ? <Square size={12} fill="currentColor" /> : <Send size={20} strokeWidth={2.4} />}
           </button>
 
         </div>
+        </div>
       </div>
 
-      <p className="text-center text-[10.5px] text-slate-700 mt-2.5">
+      <p className="relative z-10 text-center text-[11px] text-slate-500 mt-2">
         WorkBenchAI can make mistakes. Verify important info.
       </p>
     </div>

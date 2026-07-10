@@ -59,7 +59,7 @@ export default function BillingDrawer({
 
             theme: {
 
-                color: "#4F46E5"
+                color: "#2563EB"
 
             }
 
@@ -104,22 +104,45 @@ export default function BillingDrawer({
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: .25 }}
-            className="fixed right-0 top-0 z-50 h-screen w-[380px] bg-[#0f1117] border-l border-white/10 shadow-2xl flex flex-col"
+           className="fixed right-0 top-0 z-50 h-screen w-[420px] bg-gradient-to-br from-white via-slate-50 to-blue-50 border-l border-slate-200 shadow-2xl flex flex-col"
           >
 
             {/* Header */}
 
-            <div className="flex items-center justify-between p-5 border-b border-white/10">
+            <div className="flex items-center justify-between p-5 border-b border-slate-200">
 
               <div>
 
-                <h2 className="text-white text-lg font-semibold">
+             <h2
+className="
+text-4xl
+font-extrabold
+bg-gradient-to-r
+from-blue-700
+via-blue-500
+to-cyan-400
+bg-clip-text
+text-transparent
+tracking-tight
+"
+>
 
                   Billing
 
                 </h2>
 
-                <p className="text-slate-400 text-sm">
+             <p
+className="
+text-lg
+font-bold
+bg-gradient-to-r
+from-blue-700
+to-cyan-400
+bg-clip-text
+text-transparent
+tracking-wide
+"
+>
 
                   Plans & Credits
 
@@ -129,9 +152,9 @@ export default function BillingDrawer({
 
               <button
                 onClick={onClose}
-                className="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center"
+               className="w-9 h-9 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 flex items-center justify-center transition-all"
               >
-                <X size={18} className="text-slate-300"/>
+               <X size={18} className="text-slate-600"/>
               </button>
 
             </div>
@@ -140,19 +163,49 @@ export default function BillingDrawer({
 
             <div className="p-5">
 
-              <div className="rounded-xl bg-white/[0.04] border border-white/10 p-4">
+         <div
+className="
+rounded-3xl
+border
+border-blue-300
+bg-sky-50
+p-6
+relative
+shadow-xl
+shadow-blue-200/40
+hover:-translate-y-2
+hover:scale-[1.02]
+hover:shadow-2xl
+hover:shadow-cyan-300/50
+transition-all
+duration-300
+cursor-pointer
+"
+>
 
                 <div className="flex justify-between items-center">
 
                   <div>
 
-                    <p className="text-slate-400 text-sm">
+                 <p className="text-slate-500 text-base font-medium">
 
                       Current Plan
 
                     </p>
 
-                    <h3 className="text-white text-xl font-bold">
+                  <h3
+className="
+text-5xl
+font-black
+bg-gradient-to-r
+from-blue-700
+via-blue-500
+to-cyan-400
+bg-clip-text
+text-transparent
+leading-none
+"
+>
 
                      {userData?.plan ?? "Pro"}
 
@@ -160,13 +213,19 @@ export default function BillingDrawer({
 
                   </div>
 
-                  <Crown className="text-yellow-400"/>
+                  <Crown
+size={30}
+className="
+text-yellow-500
+drop-shadow-md
+"
+/>
 
                 </div>
 
                 <div className="mt-5">
 
-                  <div className="flex justify-between text-xs text-slate-400 mb-2">
+                  <div className="flex justify-between text-xs text-slate-800 mb-2">
 
                     <span>Credits</span>
 
@@ -174,10 +233,10 @@ export default function BillingDrawer({
 
                   </div>
 
-                  <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+                  <div className="h-2 rounded-full bg-slate-200 overflow-hidden">
 
                   <div
-  className="h-full bg-indigo-500 transition-all duration-500"
+  className="h-full bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-500"
   style={{
     width: `${
       (
@@ -202,27 +261,45 @@ export default function BillingDrawer({
 
               {/* Starter */}
 
-              <div className="rounded-xl border border-white/10 p-4">
+              <div
+className="
+rounded-3xl
+bg-sky-50
+border
+border-blue-300
+p-6
+shadow-xl
+shadow-blue-200/40
+hover:-translate-y-2
+hover:scale-[1.02]
+hover:shadow-2xl
+hover:shadow-cyan-300/50
+transition-all
+duration-300
+cursor-pointer
+"
+>
+  
 
-                <h3 className="text-white font-semibold">
+                <h3 className="text-slate-900 text-2xl font-bold">
 
                   Starter
 
                 </h3>
 
-                <p className="text-indigo-400 text-2xl font-bold mt-2">
+                <p className="text-blue-600 text-4xl font-extrabold mt-3">
 
                   ₹199
 
                 </p>
 
-                <p className="text-slate-400 text-sm mt-1">
+                <p className="text-slate-500 text-base mt-2">
 
                   500 Credits
 
                 </p>
 
-                <button className="mt-4 w-full rounded-lg bg-indigo-600 hover:bg-indigo-700 py-2 text-white" onClick={()=>handleUpgrade("starter")}>
+                <button className="mt-4 w-full rounded-xl bg-gradient-to-r from-blue-600 to-cyan-400 hover:opacity-90 py-2.5 text-white font-medium shadow-md shadow-blue-300/30 transition-all" onClick={()=>handleUpgrade("starter")}>
 
                   Upgrade
 
@@ -232,38 +309,70 @@ export default function BillingDrawer({
 
               {/* Pro */}
 
-              <div className="rounded-xl border border-indigo-500 p-4 relative">
+              <div
+className="
+rounded-3xl
+border
+border-blue-300
+bg-sky-50
+p-6
+relative
+shadow-xl
+shadow-blue-200/40
+hover:-translate-y-2
+hover:scale-[1.02]
+hover:shadow-2xl
+hover:shadow-cyan-300/50
+transition-all
+duration-300
+cursor-pointer
+"
+>
 
-                <span className="absolute right-3 top-3 text-xs bg-indigo-600 px-2 py-1 rounded-full text-white">
+                <span className="
+absolute
+right-4
+top-4
+px-3
+py-1
+rounded-full
+text-xs
+font-semibold
+bg-gradient-to-r
+from-blue-600
+to-cyan-400
+text-white
+shadow-md
+">
 
                   Popular
 
                 </span>
 
-                <h3 className="text-white font-semibold flex items-center gap-2">
+               <h3 className="text-slate-900 text-2xl font-bold flex items-center gap-2">
 
                   Pro
 
                   <Zap
-                    size={16}
+                    size={24}
                     className="text-yellow-400"
                   />
 
                 </h3>
 
-                <p className="text-indigo-400 text-2xl font-bold mt-2">
+                <p className="text-blue-600 text-4xl font-extrabold mt-3">
 
                   ₹499
 
                 </p>
 
-                <p className="text-slate-400 text-sm mt-1">
+                <p className="text-slate-500 text-base mt-2">
 
                   1000 Credits
 
                 </p>
 
-                <button className="mt-4 w-full rounded-lg bg-indigo-600 hover:bg-indigo-700 py-2 text-white" onClick={()=>handleUpgrade("pro")}>
+                <button className="mt-4 w-full rounded-xl bg-gradient-to-r from-blue-600 to-cyan-400 hover:opacity-90 py-2.5 text-white font-medium shadow-md shadow-blue-300/30 transition-all" onClick={()=>handleUpgrade("pro")}>
 
                   Upgrade
 
@@ -275,7 +384,7 @@ export default function BillingDrawer({
 
             {/* Footer */}
 
-            <div className="p-5 border-t border-white/10">
+            <div className="p-5 border-t border-slate-200">
 
               <p className="text-xs text-slate-500">
 
