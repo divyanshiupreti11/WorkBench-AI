@@ -147,7 +147,6 @@ WorkBenchAI
 
 Computer Science Engineering Student
 
-Graphic Era Hill University
 
 GitHub:
 https://github.com/divyanshiupreti11
