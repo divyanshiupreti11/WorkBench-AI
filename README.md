@@ -6,8 +6,6 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green?logo=mongodb)
 ![Firebase](https://img.shields.io/badge/Auth-Firebase-orange?logo=firebase)
 ![Gemini](https://img.shields.io/badge/AI-Google%20Gemini-blueviolet)
-
----
  ---
  ![Dashboard](./dashboard.png)
  ---
