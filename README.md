@@ -1,8 +1,6 @@
 # 🚀 WorkBenchAI
 > An all-in-one AI workspace for chatting, coding, web search, image generation, PDF creation, PowerPoint generation, and intelligent file assistance.
- ---
- ![Dashboard](./dashboard.png)
- ---
+
 ![React](https://img.shields.io/badge/React-19-blue?logo=react)
 ![Node.js](https://img.shields.io/badge/Node.js-Express-green?logo=node.js)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green?logo=mongodb)
@@ -10,6 +8,9 @@
 ![Gemini](https://img.shields.io/badge/AI-Google%20Gemini-blueviolet)
 
 ---
+ ---
+ ![Dashboard](./dashboard.png)
+ ---
 ## 📖 Overview
 
 WorkBenchAI is a modern AI productivity platform inspired by professional AI workspaces. It combines multiple AI capabilities into a single application, allowing users to generate code, search the web, create presentations, generate PDFs, create AI images, and interact with an intelligent conversational assistant.
