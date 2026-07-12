@@ -5,7 +5,7 @@ import { getAuth }
 import User from "../models/user.model.js";
 import redis from "../../../shared/redis/redis.js";
 import { app } from "../config/firebase.js";
-
+const isProduction = process.env.NODE_ENV === "production";
 
 export const login = async (
   req,
@@ -89,28 +89,12 @@ export const login = async (
       60 * 60 * 24 * 7
     );
 
-    res.cookie(
-
-      "session",
-
-      sessionId,
-
-      {
-        httpOnly: true,
-
-        secure: false,
-
-        sameSite: "lax",
-
-        maxAge:
-          1000 *
-          60 *
-          60 *
-          24 *
-          7,
-      }
-    );
-
+   res.cookie("session", sessionId, {
+  httpOnly: true,
+  secure: isProduction,
+  sameSite: isProduction ? "none" : "lax",
+  maxAge: 1000 * 60 * 60 * 24 * 7,
+});
     return res.json({
 
       success: true,
@@ -149,15 +133,11 @@ export const logout =
 
       }
 
-      res.clearCookie(
-        "session",
-        {
-          httpOnly: true,
-          secure: false,
-          sameSite: "lax"
-        }
-      );
-
+  res.clearCookie("session", {
+  httpOnly: true,
+  secure: isProduction,
+  sameSite: isProduction ? "none" : "lax",
+});
       return res.status(200).json({
 
         success: true,
