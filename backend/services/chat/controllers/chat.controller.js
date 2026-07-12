@@ -1,7 +1,10 @@
 import Conversation
 from "../models/conversation.model.js";
+ 
 
 export const createConversation = async (req, res) => {
+  console.log("HEADERS =", req.headers);
+console.log("X USER ID =", req.headers["x-user-id"]);
   try {
     const userId = req.headers["x-user-id"];
     console.log("userId:", userId);
