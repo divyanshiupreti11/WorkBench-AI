@@ -12,13 +12,16 @@ import cookieParser from "cookie-parser"
 dotenv.config();
 const app = express();
 const port=process.env.PORT || 5000
-app.use(cors({
+app.use(
+  cors({
     origin: [
-        "http://localhost:5173",
-        "http://localhost:5174"
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "https://work-bench-ai.vercel.app"
     ],
-    credentials: true
-}));
+    credentials: true,
+  })
+);
 app.use(
   "/uploads",
   express.static("uploads")
