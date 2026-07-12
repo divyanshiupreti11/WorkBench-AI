@@ -17,22 +17,19 @@ app.use(express.json());
 app.use(helmet());
 
 app.use(morgan("dev"));
+app.get("/", (req, res) => {
+  res.status(200).json({
+    service: "billing",
+    status: "ok",
+  });
+});
+
 app.use(
     "/",
     router
 );
 
-app.get("/",(req,res)=>{
 
-    res.json({
-
-        success:true,
-
-        message:"Billing Service Running"
-
-    });
-
-});
 
 app.listen(port, () => {
     connectDB()
